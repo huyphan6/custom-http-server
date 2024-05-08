@@ -8,12 +8,16 @@ const server = net.createServer((socket) => {
     socket.on("data", (data) => {
         const request = data.toString().split("\r\n")
         const path = request[0].split(" ")[1]
+        const contentParseArray = path.split("/")
+        const content = contentParseArray[contentParseArray.length - 1]
 
-        if (path === "/") {
-            socket.write("HTTP/1.1 200 OK\r\n\r\n")
-        } else {
-            socket.write("HTTP/1.1 404 Not Found\r\n\r\n")
-        }
+        socket.write(`HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: 3\r\n${content}`)
+
+        // if (path === "/") {
+        //     socket.write("HTTP/1.1 200 OK\r\n\r\n")
+        // } else {
+        //     socket.write("HTTP/1.1 404 Not Found\r\n\r\n")
+        // }
     })
 
     socket.on("close", () => {
