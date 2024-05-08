@@ -11,7 +11,7 @@ const server = net.createServer((socket) => {
         const contentParseArray = path.split("/")
         const content = contentParseArray[contentParseArray.length - 1]
 
-        socket.write(`HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: 3\r\n${content}`)
+        socket.write(`HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: 3\r\n\r\n${content}`)
 
         // if (path === "/") {
         //     socket.write("HTTP/1.1 200 OK\r\n\r\n")
